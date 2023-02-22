@@ -13,9 +13,8 @@ const [input2 , setInput2] = useState(0);
 const [from, setFrom] = useState("usd");
 const [to, setTo] = useState("rub");
 const [options, setOptions] = useState([]);
-const [output, setOutput] = useState(0);
-const [output2, setOutput2] = useState(0);
-const [result, setResult] = useState("");
+const [output, setOutput] = useState("Введите количество");
+const [output2, setOutput2] = useState("Введите количество");
 
 useEffect(() => {
 	Axios.get(
@@ -33,12 +32,10 @@ useEffect(() => {
 function convert() {
 	if (input > 0){	
 		var rate = info[to];
-		setOutput(input * rate);
-		setResult(input+" "+from+" = "+output.toFixed(2) + " " + to)}
+		setOutput2((input * rate).toFixed(2));}
 	if (input2 > 0){
 		var rate2 = info[from];
-		setOutput2(input2 * rate2);
-		setResult(input2+" "+to+" = "+output2.toFixed(2) + " " + from)}
+		setOutput((input2 * rate2).toFixed(2));}
 }
 
 function flip() {
@@ -54,13 +51,13 @@ return (
 		</div>
 		<div className="currency">
        	 	<div className="left">
-          		<h3>Amount</h3>
+          		<h3>количество</h3>
           		<input type="text" 
-             		placeholder="Enter the amount" 
+             		placeholder={output} 
              		onChange={(e) => setInput(e.target.value)} />
        		 </div>
        		 <div className="right">
-          		<h3>From</h3>
+          		<h3>Из</h3>
           		<Dropdown options={options} 
               		      onChange={(e) => {setFrom(e.value)}} 
           		value={from} placeholder="From" />
@@ -72,13 +69,13 @@ return (
 		</div>
 		<div className='currency2'>
 			<div className='left'>
-				<h3>Amount</h3>
+				<h3>Количество</h3>
 				<input type = "text"
-					placeholder="Enter the amount"
+					placeholder={output2}
 					onChange={(e) => setInput2(e.target.value)}/>
 			</div>
 			<div className='right'>
-				<h3>To</h3>
+				<h3>В</h3>
 				<Dropdown options={options}
 					onChange={(e) => {setTo(e.value)}}
 				value = {to} placeholder = "To"/>
@@ -86,10 +83,8 @@ return (
 		</div>
 		<div className="result">
 			<div>
-				<button onClick={() => {convert()}}>Convert</button>
+				<button onClick={() => {convert()}}>Конвертировать</button>
 			</div>
-			<h2>Converted Amount:</h2>
-			<p>{result}</p>
 		</div>
 	</div>
 	);

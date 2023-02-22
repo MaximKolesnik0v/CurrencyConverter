@@ -44,9 +44,10 @@ width: 400px;
 margin-left: 25px;
 }
 button{
-width: 100px;
+width: 200px;
 height: 30px;
 margin-top: 25px;
+margin-left: 57px;
 font-weight: bold;
 font-size: 20px;
 border: 2px solid rgb(0, 92, 23);
